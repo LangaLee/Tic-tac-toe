@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .gameSquares {
+    @apply flex bg-yellow-400 h-20 w-20 border border-black  justify-center items-center;
+  }
+  .gameButton {
+    @apply bg-yellow-400 h-10 w-12 mr-10;
+  }
+}
