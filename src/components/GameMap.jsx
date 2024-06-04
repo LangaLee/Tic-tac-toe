@@ -12,6 +12,7 @@ const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
   useEffect(() => {
     setIds([]);
     setReset(false);
+    setWinner(null);
   }, [reset]);
   useEffect(() => {
     evaluateGame(ids, setInProgress, setWinner);
