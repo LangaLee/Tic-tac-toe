@@ -1,10 +1,12 @@
-const Start = ({ setInProgress, setReset }) => {
+import { useState } from "react";
+
+const Start = ({ winner, inProgress, setInProgress, setReset }) => {
   return (
     <div className="flex flex-col">
       <button
-        className="gameButton"
+        className={inProgress || winner ? "disabledButton" : "gameButton"}
         onClick={() => {
-          setInProgress(true);
+          if (!winner) setInProgress(true);
         }}
       >
         Play

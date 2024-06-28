@@ -1,5 +1,5 @@
 import winningCombos from "./winingCombos";
-const evaluateGame = (ids, setInProgress, setWinner) => {
+const evaluateGame = (ids) => {
   const Xsquares = ids
     .filter((arr) => {
       return arr[1] === "X";
@@ -26,10 +26,7 @@ const evaluateGame = (ids, setInProgress, setWinner) => {
       winner = "O";
     }
   });
-  if (winner) {
-    setWinner(winner);
-    setInProgress(false);
-  }
+  return winner;
 };
 
 export default evaluateGame;

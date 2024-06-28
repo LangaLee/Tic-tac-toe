@@ -9,4 +9,7 @@
   .gameButton {
     @apply bg-yellow-400 h-10 w-12 mr-10;
   }
+  .disabledButton {
+    @apply bg-yellow-900 h-10 w-12 mr-10;
+  }
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import playGame from "../utils/playGame";
-import resetGame from "../utils/resetGame";
 import evaluateGame from "../utils/evaluateGame";
 const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
   const arr = Array.from(Array(9));
@@ -15,11 +14,15 @@ const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
     setWinner(null);
   }, [reset]);
   useEffect(() => {
-    evaluateGame(ids, setInProgress, setWinner);
+    const winner = evaluateGame(ids);
+    if (winner) {
+      setWinner(winner);
+      setInProgress(false);
+    }
   }, [turn]);
 
   return (
-    <div className="gameDiv flex flex-row flex-wrap h-60 w-60 bg-black">
+    <div className=" flex flex-row flex-wrap h-60 w-60 bg-black">
       {arr.map((square, index) => {
         return (
           <div
