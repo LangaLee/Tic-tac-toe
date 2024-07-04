@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import playGame from "../utils/playGame";
 import evaluateGame from "../utils/evaluateGame";
 const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
   const arr = Array.from(Array(9));
@@ -20,7 +19,20 @@ const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
       setInProgress(false);
     }
   }, [turn]);
-
+  const playGame = (e, id) => {
+    if (!inProgress) return;
+    if (turn % 2 === 0 && ids.every((arr) => arr[0] !== id)) {
+      e.target.innerText = "O";
+      setTurn((prev) => prev + 1);
+      e.target.ariaDisabled = true;
+      setIds((prev) => [...prev, [id, "O"]]);
+    } else if (ids.every((arr) => arr[0] !== id)) {
+      e.target.innerText = "X";
+      setTurn((prev) => prev + 1);
+      e.target.ariaDisabled = true;
+      setIds((prev) => [...prev, [id, "X"]]);
+    }
+  };
   return (
     <div className=" flex flex-row flex-wrap h-60 w-60 bg-black">
       {arr.map((square, index) => {
@@ -29,8 +41,7 @@ const GameMap = ({ inProgress, setInProgress, reset, setReset, setWinner }) => {
             key={index}
             className="gameSquares"
             onClick={(e) => {
-              playGame(e, inProgress, turn, setTurn, index, ids, setIds);
-              //   evaluateGame(ids);
+              playGame(e, index);
             }}
           >
             {value}

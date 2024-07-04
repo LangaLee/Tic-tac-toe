@@ -1,32 +1,30 @@
 import winningCombos from "./winingCombos";
-const evaluateGame = (ids) => {
-  const Xsquares = ids
-    .filter((arr) => {
-      return arr[1] === "X";
-    })
-    .map((arr) => arr[0]);
-  const Osquares = ids
-    .filter((arr) => {
-      return arr[1] === "O";
-    })
-    .map((arr) => arr[0]);
+const evaluateGame = (combinations) => {
+  const Xcombinations = combinations.filter((combo) => combo[1] === "X");
+  const Ocombinations = combinations.filter((combo) => combo[1] === "O");
+  let player1;
+  let player2;
+  if (Xcombinations.length > Ocombinations.length) {
+    player1 = Xcombinations;
+    player2 = Ocombinations;
+  } else {
+    player2 = Xcombinations;
+    player1 = Ocombinations;
+  }
 
-  let results = winningCombos.map((combinations) => {
-    return combinations.map((num) => {
-      if (Xsquares.includes(num)) return "X";
-      else if (Osquares.includes(num)) return "O";
+  const player1Evaluation = winningCombos.some((combo) => {
+    return combo.every((num) => {
+      return player1.flat().includes(num);
     });
   });
-  let winner;
-  results.forEach((res) => {
-    if (res.every((letter) => letter === "X")) {
-      winner = "X";
-    }
-    if (res.every((letter) => letter === "O")) {
-      winner = "O";
-    }
+  if (player1Evaluation) return player1[0][1];
+
+  const player2Evaluation = winningCombos.some((combo) => {
+    return combo.every((num) => {
+      return player2.flat().includes(num);
+    });
   });
-  return winner;
+  if (player2Evaluation) return player1[0][1];
 };
 
 export default evaluateGame;
